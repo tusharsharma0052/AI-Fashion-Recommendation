@@ -89,12 +89,17 @@ def image_to_base64(image_path: str | Path) -> Optional[str]:
 
 
 def get_image_src(image_path: str | Path) -> str:
-    """
-    Return an image src suitable for an HTML <img> tag.
-    Falls back to the placeholder URL if the local file is missing.
-    """
+    image_path = Path(image_path)
+
+    print("IMAGE PATH:", image_path)
+    print("EXISTS:", image_path.exists())
+
     b64 = image_to_base64(image_path)
-    return b64 if b64 else PLACEHOLDER_IMAGE
+
+    if not b64:
+        print("FAILED:", image_path)
+
+    return b64 if b64 else ""
 
 
 # ══════════════════════════════════════════════════════════════════════════════
