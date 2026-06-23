@@ -271,9 +271,7 @@ def _render_product_card(item: dict, label: str) -> None:
     color_badge = color_badge_html(item.get("dominant_color", "unknown"))
     score_pct = int(item.get("compat_score", 0) * 100)
 
-    # image_url = item.get("image_src", "")
-
-    st.write(item)
+    image_url = item.get("image_src", "")
 
     # Image section
     st.write("IMAGE URL =", image_url)
