@@ -270,7 +270,7 @@ def _render_product_card(item: dict, label: str) -> None:
 <div class="outfit-card">
     <p class="card-category">{label}</p>
     <img src="{item.get('image_src', '')}" alt="{item.get('name', '')}"
-         onerror="this.src='https://via.placeholder.com/280x360?text=No+Image'"/>
+        onerror="this.src='https://via.placeholder.com/280x360?text=No+Image'"/>
     <div class="card-name">{truncate(item.get('name',''), 60)}</div>
     <div class="card-brand">{item.get('brand','')}</div>
     <div class="card-rating">{item.get('rating','')}</div>

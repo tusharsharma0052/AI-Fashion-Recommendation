@@ -49,23 +49,25 @@ def load_image(
     max_width: int = 300,
     max_height: int = 400,
 ):
-    """
-    Load and resize a product image using Pillow.
-
-    Returns
-    -------
-    PIL.Image or None if the path is missing / unreadable.
-    """
     try:
-        from PIL import Image  # type: ignore
+        from PIL import Image
 
-        path = Path(image_path)
+        BASE_DIR = Path(__file__).resolve().parent.parent
+
+        path = BASE_DIR / str(image_path)
+
+        print("FULL PATH:", path)
+        print("EXISTS:", path.exists())
+
         if not path.exists():
             return None
+
         img = Image.open(path).convert("RGB")
         img.thumbnail((max_width, max_height), Image.LANCZOS)
         return img
-    except Exception:
+
+    except Exception as e:
+        print("IMAGE ERROR:", e)
         return None
 
 
