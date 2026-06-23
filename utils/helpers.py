@@ -206,26 +206,30 @@ def outfit_to_display(outfit: dict, outfit_number: int = 1) -> dict:
         number, total_score_pct, explanation,
         topwear, bottomwear, footwear, accessories (each a display_item dict)
     """
-def _display_item(item: dict) -> dict:
-    if not item:
-        return {}
-
-    image_path = item.get("image_path", "")
-    print("IMAGE PATH =", image_path)
+    def _display_item(item: dict) -> dict:
+        if not item:
+            return {}
+        return {
+            "id": item.get("id", ""),
+            "name": item.get("name", "Unknown"),
+            "brand": item.get("brand", ""),
+            "price": format_price(item.get("price_inr", 0)),
+            "rating": format_rating(item.get("rating", 0), item.get("rating_count", 0)),
+            "color": item.get("dominant_color", "unknown"),
+            "color_badge": color_badge_html(item.get("dominant_color", "unknown")),
+            "category": item.get("norm_category", ""),
+            "image_src": get_image_src(item.get("image_path", "")),
+            "occasion": item.get("occasion", ""),
+            "compat_score": item.get("compatibility_score", item.get("similarity_score", 0)),
+            "description": truncate(item.get("description", ""), 150),
+        }
 
     return {
-        "id": item.get("id", ""),
-        "name": item.get("name", "Unknown"),
-        "brand": item.get("brand", ""),
-        "price": format_price(item.get("price_inr", 0)),
-        "rating": format_rating(item.get("rating", 0), item.get("rating_count", 0)),
-        "color": item.get("dominant_color", "unknown"),
-        "color_badge": color_badge_html(item.get("dominant_color", "unknown")),
-        "category": item.get("norm_category", ""),
-        "image_src": get_image_src(image_path),
-        "occasion": item.get("occasion", ""),
-        "compat_score": item.get("compatibility_score", item.get("similarity_score", 0)),
-        "description": truncate(item.get("description", ""), 150),
+        "number":          outfit_number,
+        "total_score_pct": int(outfit.get("total_score", 0) * 100),
+        "explanation":     outfit.get("explanation", ""),
+        "topwear":         _display_item(outfit.get("topwear", {})),
+        "bottomwear":      _display_item(outfit.get("bottomwear", {})),
+        "footwear":        _display_item(outfit.get("footwear", {})),
+        "accessories":     [_display_item(a) for a in outfit.get("accessories", [])],
     }
-
-    
