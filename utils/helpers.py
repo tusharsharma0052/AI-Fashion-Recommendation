@@ -206,7 +206,7 @@ def outfit_to_display(outfit: dict, outfit_number: int = 1) -> dict:
         number, total_score_pct, explanation,
         topwear, bottomwear, footwear, accessories (each a display_item dict)
     """
-   def _display_item(item: dict) -> dict:
+def _display_item(item: dict) -> dict:
     if not item:
         return {}
 
