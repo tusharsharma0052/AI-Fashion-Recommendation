@@ -189,7 +189,7 @@ def load_products(csv_path: Path = PRODUCTS_CSV) -> pd.DataFrame:
 
     # ── Image path validation ──────────────────────────────────────────────
     df["image_path"] = df["image"].apply(
-        lambda p: str(_resolve_image_path(p)) if p else ""
+    lambda p: f"images/{Path(p).name}" if p else ""
     )
     df["image_exists"] = df["image_path"].apply(lambda p: bool(p) and Path(p).exists())
 
