@@ -254,6 +254,7 @@ def _get_engine():
 
 def _render_product_card(item: dict, label: str) -> None:
     """Render a single product card with image, name, brand, price."""
+
     if not item:
         st.markdown(
             f"""
@@ -273,35 +274,53 @@ def _render_product_card(item: dict, label: str) -> None:
 
     image_url = item.get("image_src", "")
 
-    # Image section
-    if image_url:
-        st.image(image_url, width="stretch")
-    else:
-        st.image(
-            "https://via.placeholder.com/280x360?text=No+Image",
-            width="stretch"
-        )
+    # DEBUG OUTPUT
+    st.write("IMAGE URL:", image_url)
 
-    # Card details
+    # IMAGE DISPLAY
+    try:
+        if image_url:
+            st.image(image_url, width="stretch")
+        else:
+            st.warning("No image URL found")
+    except Exception as e:
+        st.error(f"Image load failed: {e}")
+
+    # PRODUCT DETAILS CARD
     st.markdown(
         f"""
         <div class="outfit-card">
             <p class="card-category">{label}</p>
-            <div class="card-name">{truncate(item.get('name', ''), 60)}</div>
-            <div class="card-brand">{item.get('brand', '')}</div>
-            <div class="card-rating">{item.get('rating', '')}</div>
-            <div class="card-price">{item.get('price', '')}</div>
-            <div style="margin-top:6px;">{color_badge}</div>
+
+            <div class="card-name">
+                {truncate(item.get('name', ''), 60)}
+            </div>
+
+            <div class="card-brand">
+                {item.get('brand', '')}
+            </div>
+
+            <div class="card-rating">
+                {item.get('rating', '')}
+            </div>
+
+            <div class="card-price">
+                {item.get('price', '')}
+            </div>
+
+            <div style="margin-top:6px;">
+                {color_badge}
+            </div>
+
             <div style="margin-top:8px;">
-                <span class="score-badge">Match {score_pct}%</span>
+                <span class="score-badge">
+                    Match {score_pct}%
+                </span>
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-
-    # Debug (remove later)
-    # st.caption(f"Image URL: {image_url}")
 
 
 def _render_outfit_block(outfit_display: dict, outfit_idx: int) -> None:
