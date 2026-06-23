@@ -537,6 +537,10 @@ if st.session_state.processing and st.session_state.messages:
                 engine.n_outfits = n_outfits
 
                 result = engine.chat(last_user["content"])
+                st.write("Columns:", engine._retriever.products_df.columns.tolist())
+
+                if not engine._retriever.products_df.empty:
+                    st.json(engine._retriever.products_df.iloc[0].to_dict())
 
                 summary = (
                     f"Here {'are' if len(result.outfits) > 1 else 'is'} "
