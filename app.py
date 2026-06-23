@@ -274,13 +274,12 @@ def _render_product_card(item: dict, label: str) -> None:
     image_url = item.get("image_src", "")
 
     # Image section
+    st.write("IMAGE URL =", image_url)
+
     if image_url:
         st.image(image_url, width="stretch")
     else:
-        st.image(
-            "https://via.placeholder.com/280x360?text=No+Image",
-            width="stretch"
-        )
+        st.error("No image URL found")
 
     # Card details
     st.markdown(
