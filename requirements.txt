@@ -2,41 +2,41 @@
 # Python 3.10+
 
 # ── Core web framework ────────────────────────────────────────────────────────
-fastapi==0.111.0
-uvicorn[standard]==0.29.0
+fastapi
+uvicorn[standard]
 
 # ── Frontend ──────────────────────────────────────────────────────────────────
-streamlit==1.35.0
+streamlit
 
 # ── LLM ──────────────────────────────────────────────────────────────────────
-google-generativeai==0.7.2
+google-generativeai
 
 # ── Machine Learning — Embeddings ────────────────────────────────────────────
-sentence-transformers==3.0.1
-transformers==4.41.2
-torch>=2.6.0
-torchvision==0.18.0
+sentence-transformers
+transformers
+torch
+torchvision
 
 # ── Vector Search ─────────────────────────────────────────────────────────────
-faiss-cpu==1.8.0
+faiss-cpu
 
 # ── Data processing ──────────────────────────────────────────────────────────
-pandas==2.2.2
-numpy==1.26.4
+pandas
+numpy
 
 # ── Image handling ────────────────────────────────────────────────────────────
-Pillow==10.3.0
+Pillow
 
 # ── HTTP / async ──────────────────────────────────────────────────────────────
-httpx==0.27.0
-requests==2.32.3
+httpx
+requests
 
 # ── Environment ──────────────────────────────────────────────────────────────
-python-dotenv==1.0.1
+python-dotenv
 
 # ── Utilities ─────────────────────────────────────────────────────────────────
-tqdm==4.66.4
-pydantic==2.7.3
+tqdm
+pydantic
 
 # ── Optional — CLIP (FashionCLIP alternative) ────────────────────────────────
 # Uncomment if you want to use FashionCLIP instead of standard CLIP:
